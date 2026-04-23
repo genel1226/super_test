@@ -1,0 +1,197 @@
+@import 'tailwindcss';
+@import '../../vendor/livewire/flux/dist/flux.css';
+
+@source '../views';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../vendor/livewire/flux-pro/stubs/**/*.blade.php';
+@source '../../vendor/livewire/flux/stubs/**/*.blade.php';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+    /* Penguin Colors - Reemplazo completo de los zinc de Flux */
+    --color-zinc-50: var(--color-stone-50);
+    --color-zinc-100: var(--color-stone-100);
+    --color-zinc-200: var(--color-stone-200);
+    --color-zinc-300: var(--color-stone-300);
+    --color-zinc-400: var(--color-stone-400);
+    --color-zinc-500: var(--color-stone-500);
+    --color-zinc-600: var(--color-stone-600);
+    --color-zinc-700: var(--color-stone-700);
+    --color-zinc-800: var(--color-stone-800);
+    --color-zinc-900: var(--color-stone-900);
+    --color-zinc-950: var(--color-stone-950);
+
+    /* Penguin Theme Variables - Light Mode */
+    --color-surface: var(--color-stone-50);
+    --color-surface-alt: var(--color-stone-200);
+    --color-on-surface: var(--color-stone-800);
+    --color-on-surface-strong: var(--color-black);
+    --color-primary: var(--color-amber-500);
+    --color-on-primary: var(--color-black);
+    --color-secondary: var(--color-stone-900);
+    --color-on-secondary: var(--color-stone-50);
+    --color-outline: var(--color-stone-300);
+    --color-outline-strong: var(--color-blue-600);
+
+    /* Dark Theme - Ahora sí invertidos correctamente */
+    --color-surface-dark: var(--color-stone-950);
+    --color-surface-dark-alt: var(--color-stone-800);
+    --color-on-surface-dark: var(--color-stone-200);
+    --color-on-surface-dark-strong: var(--color-white);
+    --color-primary-dark: var(--color-amber-400);
+    --color-on-primary-dark: var(--color-black);
+    --color-secondary-dark: var(--color-stone-700);
+    --color-on-secondary-dark: var(--color-white);
+    --color-outline-dark: var(--color-stone-700);
+    --color-outline-dark-strong: var(--color-blue-500);
+
+    /* Shared Colors */
+    --color-info: var(--color-sky-600);
+    --color-on-info: var(--color-slate-100);
+    --color-success: var(--color-green-600);
+    --color-on-success: var(--color-white);
+    --color-warning: var(--color-amber-500);
+    --color-on-warning: var(--color-slate-900);
+    --color-danger: var(--color-red-600);
+    --color-on-danger: var(--color-slate-100);
+
+    /* Border Radius */
+    --radius-radius: var(--radius-2xl);
+
+    /* Mantener compatibilidad con accent de Flux */
+    --color-accent: var(--color-primary);
+    --color-accent-content: var(--color-primary);
+    --color-accent-foreground: var(--color-on-primary);
+}
+
+@layer theme {
+    .dark {
+        /* Reemplazar colores zinc en dark mode - Invertidos */
+        --color-zinc-50: var(--color-stone-50);
+        --color-zinc-100: var(--color-stone-100);
+        --color-zinc-200: var(--color-stone-200);
+        --color-zinc-300: var(--color-stone-300);
+        --color-zinc-400: var(--color-stone-400);
+        --color-zinc-500: var(--color-stone-500);
+        --color-zinc-600: var(--color-stone-600);
+        --color-zinc-700: var(--color-stone-700);
+        --color-zinc-800: var(--color-stone-800);
+        --color-zinc-900: var(--color-stone-900);
+        --color-zinc-950: var(--color-stone-950);
+
+        /* Penguin Dark Theme - Aplicar variables invertidas */
+        --color-surface: var(--color-surface-dark);
+        --color-surface-alt: var(--color-surface-dark-alt);
+        --color-on-surface: var(--color-on-surface-dark);
+        --color-on-surface-strong: var(--color-on-surface-dark-strong);
+        --color-primary: var(--color-primary-dark);
+        --color-on-primary: var(--color-on-primary-dark);
+        --color-secondary: var(--color-secondary-dark);
+        --color-on-secondary: var(--color-on-secondary-dark);
+        --color-outline: var(--color-outline-dark);
+        --color-outline-strong: var(--color-outline-dark-strong);
+
+        /* Mantener compatibilidad con Flux */
+        --color-accent: var(--color-primary);
+        --color-accent-content: var(--color-primary);
+        --color-accent-foreground: var(--color-on-primary);
+    }
+}
+
+@layer base {
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-outline, var(--color-stone-300, currentColor));
+    }
+
+    /* Base styles para usar las variables Penguin */
+    body {
+        @apply bg-surface text-on-surface;
+    }
+}
+
+/* Estilos personalizados para Flux usando Penguin */
+[data-flux-field]:not(ui-radio, ui-checkbox) {
+    @apply grid gap-2;
+}
+
+[data-flux-label] {
+    @apply !mb-0 !leading-tight;
+}
+
+/* Focus states usando primary de Penguin */
+input:focus[data-flux-control],
+textarea:focus[data-flux-control],
+select:focus[data-flux-control] {
+    @apply outline-hidden ring-2 ring-primary ring-offset-2;
+    ring-offset-color: var(--color-surface);
+}
+
+/* Estilos adicionales para componentes comunes de Flux */
+[data-flux-button] {
+    @apply bg-primary text-on-primary hover:bg-primary/90 transition-colors;
+    @apply focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:outline-hidden;
+}
+
+[data-flux-card] {
+    @apply bg-surface border border-outline rounded-radius;
+}
+
+[data-flux-input], 
+[data-flux-textarea], 
+[data-flux-select] {
+    @apply bg-surface border border-outline text-on-surface rounded-lg px-3 py-2;
+    @apply focus:border-primary focus:ring-1 focus:ring-primary focus:outline-hidden;
+}
+
+[data-flux-checkbox], 
+[data-flux-radio] {
+    @apply border-outline text-primary focus:ring-primary;
+}
+
+/* Badge y tags */
+[data-flux-badge] {
+    @apply bg-secondary text-on-secondary rounded-full px-2 py-0.5 text-xs;
+}
+
+/* Alertas y notificaciones */
+[data-flux-alert-info] {
+    @apply bg-info/10 text-info border border-info/20;
+}
+
+[data-flux-alert-success] {
+    @apply bg-success/10 text-success border border-success/20;
+}
+
+[data-flux-alert-warning] {
+    @apply bg-warning/10 text-warning border border-warning/20;
+}
+
+[data-flux-alert-danger] {
+    @apply bg-danger/10 text-danger border border-danger/20;
+}
+
+/* Dark mode ajustes para componentes Flux */
+.dark [data-flux-button] {
+    @apply bg-primary text-on-primary;
+}
+
+.dark [data-flux-card] {
+    @apply bg-surface border-outline-dark;
+}
+
+.dark [data-flux-input], 
+.dark [data-flux-textarea], 
+.dark [data-flux-select] {
+    @apply bg-surface border-outline-dark text-on-surface;
+}
+
+.dark [data-flux-badge] {
+    @apply bg-secondary-dark text-on-secondary-dark;
+}
