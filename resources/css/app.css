@@ -38,8 +38,8 @@
 
     /* Dark Theme - Ahora sí invertidos correctamente */
     --color-surface-dark: var(--color-stone-950);
-    --color-surface-dark-alt: var(--color-stone-800);
-    --color-on-surface-dark: var(--color-stone-200);
+    --color-surface-dark-alt: var(--color-stone-700);
+    --color-on-surface-dark: var(--color-stone-300);
     --color-on-surface-dark-strong: var(--color-white);
     --color-primary-dark: var(--color-amber-400);
     --color-on-primary-dark: var(--color-black);
